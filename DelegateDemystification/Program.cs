@@ -10,12 +10,15 @@ namespace DelegateDemystification
         static void Foo()=> Console.WriteLine("foo");
         static void Main(string[] args)
         {
+            // null-status
             Console.WriteLine(subjectone == null);
             subjectone += Foo;
             Console.WriteLine(subjectone == null);
             subjectone -= Foo;
             Console.WriteLine(subjectone == null);
 
+
+            // null-status på kopier
 
             subjectone += Foo;
             var othersubject = subjectone;
