@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp23
+﻿namespace DelegateDemystification
 {
     interface IObserver
     {

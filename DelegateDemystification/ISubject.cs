@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ConsoleApp23
+namespace DelegateDemystification
 {
     interface ISubject
     {

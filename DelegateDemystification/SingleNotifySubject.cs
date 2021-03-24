@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace ConsoleApp23
+namespace DelegateDemystification
 {
     class SingleNotifySubject : ISubject
     {
