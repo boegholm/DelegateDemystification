@@ -6,30 +6,14 @@ namespace DelegateDemystification
     {
         class RelayObserver : IObserver
         {
-            public override bool Equals(object obj)
-            {
-                var o = obj as RelayObserver;
-                if (o != null)
-                {
-                    return action.Equals(o.action);
-                }
-                return false;
-            }
             Action action;
             public RelayObserver(Action action)
             {
                 this.action = action;
             }
-
-            public void Update()
-            {
-                action.Invoke();
-            }
-
-            public override int GetHashCode()
-            {
-                return action.GetHashCode();
-            }
+            public override bool Equals(object obj) => (obj is RelayObserver r) && action.Equals(r.action);
+            public void Update() => action.Invoke();
+            public override int GetHashCode() => action.GetHashCode();
         }
         public Relay(Action action) : base(new RelayObserver(action)){ }
     }

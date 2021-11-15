@@ -4,16 +4,11 @@ namespace DelegateDemystification
 {
     class MultiNotifySubject : ISubject
     {
-        public MultiNotifySubject(IEnumerable<IObserver> observers)
+        public MultiNotifySubject(IEnumerable<IObserver> observers) 
         {
-            foreach (var observer in observers)
-            {
-                this.observers.Add(observer);
-            }
+            Observers = new List<IObserver>(observers);
         }
-        private List<IObserver> observers=new List<IObserver>();
-        public IEnumerable<IObserver> Observers => observers;
-
+        public IEnumerable<IObserver> Observers { get; }
         public void Notify()
         {
             foreach (var item in Observers)
@@ -22,5 +17,4 @@ namespace DelegateDemystification
             }
         }
     }
-
 }

@@ -6,13 +6,11 @@ namespace DelegateDemystification
     class SingleNotifySubject : ISubject
     {
         IObserver singleObserver;
-
         public IEnumerable<IObserver> Observers { 
             get {
                 yield return singleObserver;
             } 
         }
-
         public SingleNotifySubject(IObserver obs)
         {
             singleObserver = obs;
@@ -28,13 +26,9 @@ namespace DelegateDemystification
             foreach (var item in first.Observers)
             {
                 if (!skipped && item.Equals(second.singleObserver))
-                {
                     skipped = true;
-                }
                 else
-                {
                     observers.Add(item);
-                }
             }
             if (observers.Count == 0)
                 return null;
@@ -42,11 +36,6 @@ namespace DelegateDemystification
                 return new SingleNotifySubject(observers[0]);
             return new MultiNotifySubject(observers);                
         }
-
-        public void Notify()
-        {
-            singleObserver.Update();
-        }
+        public void Notify() => singleObserver.Update();
     }
-
 }

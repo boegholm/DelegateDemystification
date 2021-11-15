@@ -5,8 +5,6 @@ namespace DelegateDemystification
 {
     interface ISubject
     {
-        //ISubject Attach(IObserver observer);
-        //ISubject Detach(IObserver observer);
         void Notify();
         IEnumerable<IObserver> Observers { get; }
         public static ISubject operator +(ISubject one, Action other) => one==null? new Relay(other) : one+new Relay(other);
