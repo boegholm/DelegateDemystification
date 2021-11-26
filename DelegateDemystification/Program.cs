@@ -17,7 +17,6 @@ namespace DelegateDemystification
             subjectone -= Foo;
             Console.WriteLine(subjectone == null);
 
-
             // null-status på kopier
 
             subjectone += Foo;

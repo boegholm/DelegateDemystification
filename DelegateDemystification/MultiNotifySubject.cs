@@ -12,9 +12,7 @@ namespace DelegateDemystification
         public void Notify()
         {
             foreach (var item in Observers)
-            {
                 item.Update();
-            }
         }
     }
 }

@@ -11,6 +11,7 @@ namespace DelegateDemystification
                 yield return singleObserver;
             } 
         }
+
         public SingleNotifySubject(IObserver obs)
         {
             singleObserver = obs;
@@ -36,6 +37,8 @@ namespace DelegateDemystification
                 return new SingleNotifySubject(observers[0]);
             return new MultiNotifySubject(observers);                
         }
+
         public void Notify() => singleObserver.Update();
     }
+
 }
