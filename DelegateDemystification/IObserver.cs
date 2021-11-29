@@ -1,6 +1,6 @@
 ﻿namespace DelegateDemystification
 {
-    interface IObserver
+    public interface IObserver
     {
         void Update();
     }

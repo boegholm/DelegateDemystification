@@ -2,6 +2,16 @@
 
 namespace DelegateDemystification
 {
+
+class Example
+{
+    void Run(ISubject subject)
+    {
+        subject?.Notify();
+    }
+}
+
+
     class Program
     {
         static ISubject subjectone;
