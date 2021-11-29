@@ -4,9 +4,8 @@ using System.Linq;
 
 namespace DelegateDemystification
 {
-    public struct Subject : ISubject
+    class Subject : ISubject
     {
-
         public Subject(Action action) : this(new RelayObserver(action))
         {
 
@@ -20,6 +19,13 @@ namespace DelegateDemystification
             Observers = new List<IObserver> { singleObserver };
         }
         public IEnumerable<IObserver> Observers { get; }
+
+        public bool Equals(ISubject other)
+        {
+            if(other==null)
+                return false;
+            return Observers.SequenceEqual(other.Observers);
+        }
 
         public void Notify()
         {

@@ -5,14 +5,14 @@ namespace DelegateDemystification.Tests
 {
     public class SubjectTests
     {
+        static void Void() { }
+
         [Fact]
         public void SubjectWithoutObserversAreNull()
         {
             ISubject SampleNullSubject = default;
             Assert.Null(SampleNullSubject);
         }
-
-        static void Void() { }
         
         [Fact]
         public void NullSubjectAddingLambda_SubscriberReturnsNonNull()
@@ -66,8 +66,27 @@ namespace DelegateDemystification.Tests
         [Fact]
         public void MultiSubjectEquality()
         {
-            Subject sa;
-            sa += (Action)Void;
+            void Bar() { }
+            ISubject sa= default;
+            ISubject sb = default;
+            sa += Void;
+            sa += Bar;
+            sb += Void;
+            sb += Bar;
+            Assert.True(sb.Equals(sa));
+        }
+        [Fact]
+        public void MultiSubjectEqualitySequnceMatters()
+        {
+            void Bar() { }
+            ISubject sa = default;
+            ISubject sb = default;
+            sa += Void;
+            sa += Bar;
+            sb += Bar;
+            sb += Void;
+            sb.Equals(sa);
+            Assert.NotEqual(sa, sb);
         }
     }
 }
