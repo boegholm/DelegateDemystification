@@ -4,9 +4,6 @@ using System.Linq;
 
 namespace DelegateDemystification
 {
-    //public static bool operator ==(ISubject lhs, ISubject rhs) { return false; }
-    //public static bool operator !=(ISubject lhs, ISubject rhs) { return false; }
-
     public partial interface ISubject
     {
         public bool Equals(ISubject other) => 
