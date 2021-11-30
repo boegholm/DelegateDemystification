@@ -1,32 +1,41 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DelegateDemystification
 {
+    //public static bool operator ==(ISubject lhs, ISubject rhs) { return false; }
+    //public static bool operator !=(ISubject lhs, ISubject rhs) { return false; }
+
     public partial interface ISubject
     {
-        //public static bool operator ==(ISubject lhs, ISubject rhs) { return false; }
-        //public static bool operator !=(ISubject lhs, ISubject rhs) { return false; }
-        public bool Equals(ISubject other)
-        {
-            return ReferenceEquals(this, other) || Observers.SequenceEqual(other.Observers);
-        }
-        static ISubject operator +(ISubject one, ISubject other) => Combine(one, other);
-        static ISubject Combine(ISubject first, ISubject second) => (first, second) switch
+        public bool Equals(ISubject other) => 
+            ReferenceEquals(this, other) || 
+            Observers.SequenceEqual(other.Observers);
+        static ISubject operator +(ISubject a, ISubject b) => (a, b) switch
         {
             (null, null) => null,
-            (null, _) => second,
-            (_, null) => first,
-            _ => new Subject(first.Observers.Concat(second.Observers).ToList())
+            (null, _) => b,
+            (_, null) => a,
+            _ => new Subject(a.Observers.Concat(b.Observers).ToList())
         };
 
-        static ISubject operator -(ISubject one, Action action) => action == null ? one : one - new Subject(action);
-        static ISubject operator -(ISubject one, ISubject other) => (one, other) switch
+        static ISubject operator -(ISubject s, Action a) => a == null ? s : s - new Subject(a);
+        static ISubject operator -(ISubject a, ISubject b) => (a, b) switch
         {
-            (null, _) => other,
-            (_, null) => one,
-            _ => one.Remove(other)
+            (null, _) => b,
+            (_, null) => a,
+            _ => a.Remove(b)
         };
-        static ISubject operator +(ISubject one, Action other) => one == null ? new Subject(other) : one + new Subject(other);
+        private ISubject Remove(ISubject other)
+        {
+            List<IObserver> observers = Observers.ToList();
+            foreach (var item in other.Observers)
+            {
+                observers.Remove(item);
+            }
+            return observers.Any() ? new Subject(observers) : null;
+        }
+        static ISubject operator +(ISubject s, Action a) => s == null ? new Subject(a) : s + new Subject(a);
     }
 }
